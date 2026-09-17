@@ -5,21 +5,27 @@ const { prospects } = require('./data/prospects');
 const app = express();
 
 const parseCorsOrigins = (originsRaw) => {
-  if (!originsRaw || originsRaw === '*') {
-    return '*';
-  }
-
-  const origins = originsRaw
+  const defaults = ['http://localhost:3000', 'http://127.0.0.1:3000'];
+  const configured = (originsRaw || '')
     .split(',')
     .map((origin) => origin.trim())
-    .filter(Boolean);
+    .filter(Boolean)
+    .filter((origin) => origin !== '*');
 
-  return origins.length > 0 ? origins : '*';
+  return [...new Set([...defaults, ...configured])];
 };
+
+const allowedOrigins = parseCorsOrigins(process.env.CORS_ORIGIN);
 
 app.use(
   cors({
-    origin: parseCorsOrigins(process.env.CORS_ORIGIN),
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error('CORS origin denied'));
+    },
     methods: ['GET', 'POST', 'OPTIONS']
   })
 );
@@ -116,7 +122,8 @@ app.use((_req, res) => {
 });
 
 app.use((err, _req, res, _next) => {
-  const statusCode = Number.isInteger(err.status) ? err.status : 500;
+  const statusCode =
+    Number.isInteger(err.status) ? err.status : err.message === 'CORS origin denied' ? 403 : 500;
 
   res.status(statusCode).json({
     error: err.message || 'Internal server error'

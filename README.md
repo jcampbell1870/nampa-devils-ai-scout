@@ -59,7 +59,7 @@ npm run build
 ## Environment variables
 
 - `PORT` backend server port (default `3000`)
-- `CORS_ORIGIN` allowed origin(s), comma-separated or `*`
+- `CORS_ORIGIN` allowed origin(s), comma-separated (wildcard `*` is ignored)
 - `AI_RESEARCH_PROVIDER` provider identifier (placeholder)
 - `AI_RESEARCH_API_KEY` secret key for future provider calls
 
