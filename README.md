@@ -94,7 +94,8 @@ The frontend uses relative asset paths, so it works under the repository subpath
 - Attempts to load `/api/prospects` (or configured API base URL)
 - If API is unavailable, continues using local seeded data gracefully
 
-To configure a Render API base URL, create `frontend/config.js` in your deployment artifact with:
+GitHub Pages now loads `frontend/config.js` before the app bundle. Update that file to point at
+your deployed Render service:
 
 ```js
 window.NAMPA_DEVILS_CONFIG = {
