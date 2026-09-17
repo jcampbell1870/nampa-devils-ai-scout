@@ -1,0 +1,27 @@
+{
+  "name": "nampa-devils-ai-scout",
+  "version": "1.0.0",
+  "description": "AI hockey prospect research agent for the Nampa Devils Hockey Club, with Render web service backend and GitHub Pages results display.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "build": "node scripts/build-frontend.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcampbell1870/nampa-devils-ai-scout.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "supertest": "^7.2.2"
+  }
+}

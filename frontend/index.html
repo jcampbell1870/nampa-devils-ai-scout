@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nampa Devils AI Scout</title>
+    <meta
+      name="description"
+      content="Nampa Devils Hockey Club AI-assisted prospect dashboard for future North Peace Hockey League roster planning."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <p class="eyebrow">Nampa Devils Hockey Club</p>
+      <h1>Nampa Devils AI Scout</h1>
+      <p>
+        Prospect evaluation dashboard for the future North Peace Hockey League franchise in Alberta,
+        Canada.
+      </p>
+    </header>
+
+    <main>
+      <section class="panel controls" aria-label="Prospect filters">
+        <div>
+          <label for="search">Search prospects</label>
+          <input id="search" type="search" placeholder="Name, team, location, position" />
+        </div>
+        <div>
+          <label for="position">Position</label>
+          <select id="position">
+            <option value="">All positions</option>
+          </select>
+        </div>
+        <div>
+          <label for="sort">Sort fit score</label>
+          <select id="sort">
+            <option value="desc">Highest fit first</option>
+            <option value="asc">Lowest fit first</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="panel status" aria-live="polite">
+        <strong id="data-mode">Loading...</strong>
+      </section>
+
+      <section id="prospect-list" class="cards" aria-label="Prospect list"></section>
+
+      <section class="panel disclaimer">
+        <h2>Responsible use</h2>
+        <p>
+          AI-assisted research supports decision-making but does not replace qualified scouting,
+          in-person evaluation, player consent, privacy safeguards, or league policy compliance.
+        </p>
+      </section>
+    </main>
+
+    <script src="./data/prospects.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
