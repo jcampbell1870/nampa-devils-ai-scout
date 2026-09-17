@@ -1,8 +1,10 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const { prospects } = require('./data/prospects');
 
 const app = express();
+const frontendRoot = path.resolve(__dirname, '..', 'frontend');
 
 const parseCorsOrigins = (originsRaw) => {
   const defaults = ['http://localhost:3000', 'http://127.0.0.1:3000'];
@@ -30,6 +32,7 @@ app.use(
   })
 );
 app.use(express.json({ limit: '100kb' }));
+app.use(express.static(frontendRoot));
 
 const positions = [...new Set(prospects.map((prospect) => prospect.position))].sort();
 
