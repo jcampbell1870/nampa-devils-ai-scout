@@ -11,6 +11,13 @@ test('GET /health returns service status', async () => {
   assert.ok(response.body.timestamp);
 });
 
+test('GET / serves the dashboard HTML', async () => {
+  const response = await request(app).get('/').expect(200);
+
+  assert.match(response.headers['content-type'], /text\/html/);
+  assert.match(response.text, /<title>Nampa Devils AI Scout<\/title>/);
+});
+
 test('GET /api/prospects returns prospect list', async () => {
   const response = await request(app).get('/api/prospects').expect(200);
 
