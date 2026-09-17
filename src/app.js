@@ -36,10 +36,6 @@ app.use(express.static(frontendRoot));
 
 const positions = [...new Set(prospects.map((prospect) => prospect.position))].sort();
 
-app.get('/', (_req, res) => {
-  res.sendFile(path.join(frontendRoot, 'index.html'));
-});
-
 app.get('/health', (_req, res) => {
   res.json({
     status: 'ok',
