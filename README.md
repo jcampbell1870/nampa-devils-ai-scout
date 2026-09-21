@@ -85,6 +85,10 @@ Repository settings required:
 1. **Settings → Pages → Build and deployment**
 2. Source: **GitHub Actions**
 
+The Pages workflow also runs each Monday evening at 7:00 p.m. in the Eastern time zone.
+Because GitHub Actions schedules are UTC-based, the workflow checks both possible UTC trigger
+times and only publishes during the matching Monday 7:00 p.m. Eastern window.
+
 The frontend uses relative asset paths, so it works under the repository subpath
 (e.g. `https://jcampbell1870.github.io/nampa-devils-ai-scout/`) rather than only at domain root.
 
@@ -93,6 +97,8 @@ The frontend uses relative asset paths, so it works under the repository subpath
 - Starts with seeded local data immediately
 - Attempts to load `/api/prospects` (or configured API base URL)
 - If API is unavailable, continues using local seeded data gracefully
+- The GitHub Pages build regenerates the seeded frontend prospect list from `src/data/prospects.js`
+  so scheduled deployments publish the current backend prospect list
 
 GitHub Pages now loads `frontend/config.js` before the app bundle. Update that file to point at
 your deployed Render service:
